@@ -1,0 +1,102 @@
+# YAML: Lenguaje de marcado de información, como HTML, XML, JSON
+# YAML: Yet another markup language : NO !!!!!
+# GNU:  GNU is not Unix
+# YAML aint markup language
+
+# Un fichero YAML puede contener varios documentos YAML
+# Cada documento va precedido de tres guiones ---, menos el primero
+# Cada documento puede acabar con 3 puntos ..., lo vereis poco
+---
+# Los documentos admiten comentarios, con el cuadradito
+# Cada documento contiene un NODO
+# Los nodos pueden ser de 2 tipos: ESCALARES (simples) o DE COLECCION
+---
+# Escalares: Numeros, textos, valores lógicos, fechas, null
+1.23
+---
+9
+---
+-.Inf # inf INF Inf
+---
+.NaN # Nan NAN nan
+---
+True    # true TRUE
+---
+False
+---
+# Hoy en día estamos en la spec 1.2 de YAML. en la 1.1 se admitían como valores lógicos:
+Yes
+y
+No
+n
+Off
+On
+# Hoy en día, han sido eliminados de la spec. CAGADA GRANDE... 
+# Los parsers de YAML hoy en día admiten algunas de estas formas... por compatibilidad
+---
+# Textos
+Ho"la am'igo
+
+Qué tal estás?
+---
+"Ho\"la #am'igo\nQué \ttal estás?"
+---
+'Ho"la #ami''go\nQué tal estás?'
+---
+# Para textos más complicados: 2 sintaxis
+# Literal
+|-
+    Hola " amigo' que # tal estás \n
+    Yo bien
+     
+     
+     
+---
+# Folded
+>+
+    Hola " amigo' que # tal estás \n
+    Yo bien
+     docker container create   \
+    --name wp_db \
+    -p 172.17.0.1:3307:3306 \
+---
+
+> 
+    docker container create
+    --name wp
+    -p 8080:80
+    -e WORDPRESS_DB_HOST=172.17.0.1:3307
+    -e WORDPRESS_DB_USER=usuario
+    -e WORDPRESS_DB_PASSWORD=password
+    -e WORDPRESS_DB_NAME=basedatos
+---
+~
+---
+# Colecciones: 
+# Listas ordenadas: Secuencia ordenada de Nodos
+- item 1
+- item 2
+- 3
+- true
+- - hola
+- 
+          - hola  
+          - hola
+            - hola
+- 
+  - hola  
+  - hola  
+  - hola
+---
+# Hay una sintaxis alternativa para listas:
+- item 1
+- 2 
+- true
+---
+[ "item 1", 2 , true ]
+# Diccionarios desordenados
+---
+# Diccionarios ordenados
+# Listas desordenadas
+
+
