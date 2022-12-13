@@ -92,9 +92,30 @@ Qué tal estás?
 - item 1
 - 2 
 - true
+- item4
 ---
-[ "item 1", 2 , true ]
-# Diccionarios desordenados
+[ "item 1", 2 , true, item 4 ]
+---
+[]
+---
+# Diccionarios desordenados. Colecciones clave-valor
+nombre:     Ivan
+apellidos:   
+    primero: Osuna
+    segundo: Ayuste
+edad:       44
+mascotas:   
+    - perro
+    - gato
+    - leon
+---
+{ "nombre": "Ivan", "apellido": "Osuna" }
+---
+{}
+---
+nombre:     Ivan
+edad:       44
+apellido:   Osuna
 ---
 # Diccionarios ordenados
 # Listas desordenadas

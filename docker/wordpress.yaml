@@ -1,0 +1,27 @@
+version: "2.1"
+
+services:
+
+    basedatos:                      # fqdn resoluble a través del DNS dee docker en su red virtual
+        container_name:             wp_db
+        image:                      mariadb:10.10-jammy
+        environment:
+            MARIADB_ROOT_PASSWORD:  password
+            MARIADB_USER:           usuario
+            MARIADB_PASSWORD:       password
+            MARIADB_DATABASE:       basedatos
+        volumes:
+                                  - /home/ubuntu/environment/datos/mariadb:/var/lib/mysql
+
+    wordpress:
+        container_name:             wp
+        image:                      wordpress:php8.1-apache
+        ports:
+                                  - 8080:80
+        environment:
+                                  - WORDPRESS_DB_HOST=basedatos
+                                  - WORDPRESS_DB_USER=usuario
+                                  - WORDPRESS_DB_PASSWORD=password
+                                  - WORDPRESS_DB_NAME=basedatos
+        volumes:
+                                  - /home/ubuntu/environment/datos/wp:/var/www/html

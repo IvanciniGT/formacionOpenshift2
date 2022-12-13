@@ -152,3 +152,25 @@ docker container create   \
     -e WORDPRESS_DB_NAME=basedatos \
     -v /home/ubuntu/environment/datos/wp:/var/www/html \
     wordpress:php8.1-apache
+
+---
+
+# Cliente docker-compose
+
+Me permite definir contenedores en ficheros YAML (multiples contenedores en un único fichero)
+
+Lo invoco con el comando:
+$ docker-compose <VERBO> <args>
+
+VERBO:
+    start       arrancarlos
+    stop        pararlos
+    up          create | update + start
+    down        stop + delete
+    restart
+
+args:
+    -d Modo detached (sin bloquear la consola ni mostrar logs por defecto)
+    -f Fichero que contiene la especificación de contenedores. Por defecto, si no se suministra:
+        - docker-compose.yaml
+        - docker-compose.yml
