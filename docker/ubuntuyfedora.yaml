@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+
+    ubuntu:                    
+        container_name:             ubuntu
+        image:                      ubuntu
+        command:                    
+            - /bin/bash
+            - -c
+            - sleep 3600
+
+    fedora:
+        container_name:             fedora
+        image:                      fedora
+        command:                    
+            - /bin/bash
+            - -c
+            - sleep 3600

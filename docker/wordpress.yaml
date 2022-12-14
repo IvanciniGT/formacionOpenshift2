@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
 
-    basedatos:                      # fqdn resoluble a través del DNS dee docker en su red virtual
+    basedatos:                      # fqdn resoluble a través del DNS de docker en su red virtual
         container_name:             wp_db
         image:                      mariadb:10.10-jammy
         environment:
