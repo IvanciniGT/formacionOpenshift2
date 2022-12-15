@@ -1,0 +1,80 @@
+
+kind:           PersistentVolumeClaim
+apiVersion:     v1              
+
+metadata:
+    name:       peticion-volumen-ivan
+
+spec: 
+    resources:
+        requests:
+            storage: 2Gi
+    storageClassName: rapidito-redundante
+    accessModes:
+#        - ReadWriteOncePod      # Dame un volumen que pueda ser leido y escrito por un unico pod (por mi)
+        - ReadWriteOnce         # Dame un volumen que pueda ser leido y escrito por los pods de un único host
+#        - ReadWriteMany         # Dame un volumen que pueda ser leido y escrito por multiples pods
+#        - ReadOnlyMany          # Dame un volumen de solo lectura por multiples pods
+    
+---
+kind:           ConfigMap           # Tipo de objeto a crear
+apiVersion:     v1                  # En que libreria se incluye/define ese tipo de objeto libreria/version
+
+metadata:
+    name:       fichero-nginx-puerto-81
+
+data:
+    default.conf: |
+                    server {
+                        listen       81;
+                        listen  [::]:81;
+                        server_name  localhost;
+                        location / {
+                            root   /usr/share/nginx/html;
+                            index  index.html index.htm;
+                        }
+                        error_page   500 502 503 504  /50x.html;
+                        location = /50x.html {
+                            root   /usr/share/nginx/html;
+                        }
+                    }
+---
+kind:           Pod           # Tipo de objeto a crear
+apiVersion:     v1                  # En que libreria se incluye/define ese tipo de objeto libreria/version
+
+metadata:
+    name:       pod-ivan-avanzado
+
+spec:
+    containers:
+        - 
+            image:              nginx:latest
+            imagePullPolicy:    IfNotPresent
+            name:               contenedor1
+            volumeMounts: 
+                - name:         compartido
+                  mountPath:    /datos
+        - 
+            image:              nginx:latest
+            imagePullPolicy:    IfNotPresent
+            name:               contenedor2
+            volumeMounts: 
+                - name:         configuracion-contenedor2
+                  mountPath:    /etc/nginx/conf.d
+                - name:         compartido
+                  mountPath:    /compartido
+                - name:         persistente
+                  mountPath:    /persistente
+            
+    volumes:
+        -   name: configuracion-contenedor2 # Inyectar configuración en el contenedor
+            configMap:
+                name: fichero-nginx-puerto-81
+                
+        -   name: compartido                # Compartir datos entre contenedores
+            emptyDir: 
+                medium: Memory
+
+        -   name: persistente               # Persistencia de datos
+            persistentVolumeClaim: 
+                claimName:          peticion-volumen-ivan
