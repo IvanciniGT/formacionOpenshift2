@@ -3,7 +3,7 @@ kind:           PersistentVolumeClaim
 apiVersion:     v1              
 
 metadata:
-    name:       peticion-volumen-ivan
+    name:       peticion-volumen-ivan-2
 
 spec: 
     resources:
@@ -77,4 +77,4 @@ spec:
 
         -   name: persistente               # Persistencia de datos
             persistentVolumeClaim: 
-                claimName:          peticion-volumen-ivan
+                claimName:          peticion-volumen-ivan-2

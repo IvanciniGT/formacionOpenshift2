@@ -1,0 +1,21 @@
+
+kind:           PersistentVolume
+apiVersion:     v1              
+
+metadata:
+    name:       volumen00022
+
+spec: 
+    storageClassName: rapidito-redundante
+    capacity: 
+        storage: 4Gi
+    accessModes:
+#        - ReadWriteOncePod      # Dame un volumen que pueda ser leido y escrito por un unico pod (por mi)
+        - ReadWriteOnce         # Dame un volumen que pueda ser leido y escrito por los pods de un único host
+        - ReadWriteMany         # Dame un volumen que pueda ser leido y escrito por multiples pods
+#        - ReadOnlyMany          # Dame un volumen de solo lectura por multiples pods
+    
+    # Tipo de volumen: AWS, AZURE, IBM, VSPHERE, CABINA, ISCSI
+    hostPath:
+        path: /home/ubuntu/environment/kubernetes/volumen0022
+        type: DirectoryOrCreate
