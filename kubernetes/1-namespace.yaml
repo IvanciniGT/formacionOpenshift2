@@ -1,0 +1,5 @@
+kind:           Namespace           # Tipo de objeto a crear
+apiVersion:     v1                  # En que libreria se incluye/define ese tipo de objeto libreria/version
+
+metadata:
+    name:       ivan

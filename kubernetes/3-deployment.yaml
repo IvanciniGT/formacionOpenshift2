@@ -1,0 +1,26 @@
+kind:           Deployment          
+apiVersion:     apps/v1           
+
+metadata:
+    name:       deployment-ivan
+
+spec:
+    replicas: 5
+    
+    selector:
+        matchLabels:
+            plantilla: nginx
+    
+    template:
+        metadata:
+            name:       pod-template-ivan
+            labels:
+                plantilla: nginx
+        
+        spec:
+            containers:
+                - 
+                    image:              nginx:latest
+                    imagePullPolicy:    IfNotPresent
+                    name:               nginx-container
+                

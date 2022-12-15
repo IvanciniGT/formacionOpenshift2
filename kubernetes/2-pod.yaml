@@ -1,0 +1,12 @@
+kind:           Pod           # Tipo de objeto a crear
+apiVersion:     v1                  # En que libreria se incluye/define ese tipo de objeto libreria/version
+
+metadata:
+    name:       pod-ivan
+
+spec:
+    containers:
+        - 
+            image:              nginx:latest
+            imagePullPolicy:    IfNotPresent
+            name:               nginx-container
