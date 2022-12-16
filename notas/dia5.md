@@ -73,3 +73,29 @@ WP -> A mano
     Service
     Route
     PVC
+    
+# Uso de quotas en Kubernetes
+
+                CAPACIDAD REAL      LO QUE TIENE COMPROMETIDO         USO REAL
+                RAM     CPU         RAM     CPU                       RAM     CPU
+Maquina 1       16Gbs   8 Cpu               
+    POD MariaDB                     8       5                         4 Gbs->6Gbs 
+    POD WP                          8       3                         11 Gbs            Me crujo el pod y lo reinicio
+Maquina 2       16Gbs   8 Cpu
+    
+POD MARIADB 
+Limit           Hasta donde puedo llegar                16 Gbs  8 cores
+Request         Lo que kubernetes debe garantizarme      8 Gbs  5 cores
+
+POD WP
+Limit           Hasta donde puedo llegar                16 Gbs  8 cores
+Request         Lo que kubernetes debe garantizarme     16 Gbs  3 cores
+
+Por eso, el request y el limit de memoria los solemos configurar iguales.
+
+JVM -xms600m  -xmx600m 
+
+
+# Openshift no permite usar imagenes de contenedor que ejecuten los procesos con usuario root
+Casi todas las imagenes que encontreis en docker_hub usan ell usuario root para ejecuatr los procesos.
+Esto se puede desbloquear... pero no está recomendado
